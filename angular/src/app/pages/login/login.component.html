@@ -1,22 +1,8 @@
-<app-menu-login></app-menu-login>
-<div class="container pt-5">
-  <div class="card p-4">
-    <form ngNativeValidate (ngSubmit)="registrar()">
-      <div class="mb-3">
-        <label for="userName" class="form-label">Name</label>
-        <input
-          [(ngModel)]="userInfo.userName"
-          [ngModelOptions]="{ standalone: true }"
-          type="text"
-          class="form-control"
-          id="exampleUserName"
-          aria-describedby="emailHelp"
-        />
-        <div *ngIf="userInfoValidator.userName" id="userNameHelp" class="form-text text-danger">
-          UserName invalido.
-        </div>
-      </div>
-      <div class="mb-3">
+<app-menu></app-menu>
+<section class="container py-5">
+  <article class="card p-4">
+    <form ngNativeValidate (ngSubmit)="login()">
+      <section class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Email address</label>
         <input
           [(ngModel)]="userInfo.email"
@@ -26,11 +12,11 @@
           id="exampleInputEmail1"
           aria-describedby="emailHelp"
         />
-        <div *ngIf="userInfoValidator.email" id="emailHelp" class="form-text text-danger">
+        <article *ngIf="userInfoValidator.email" id="emailHelp" class="form-text text-danger">
           Email invalido.
-        </div>
-      </div>
-      <div class="mb-3">
+        </article>
+      </section>
+      <section class="mb-3">
         <label for="exampleInputPassword1" class="form-label">Password</label>
         <input
           [(ngModel)]="userInfo.password"
@@ -39,15 +25,12 @@
           class="form-control"
           id="exampleInputPassword1"
         />
-        <div *ngIf="userInfoValidator.password" id="passwordHelp" class="form-text text-danger">
+        <article *ngIf="userInfoValidator.password" id="passwordHelp" class="form-text text-danger">
           Contraseña invalida.
-        </div>
-      </div>
-      <div class="mb-3 form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-      </div>
+        </article>
+      </section>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-  </div>
-</div>
+  </article>
+</section>
+<app-footer></app-footer>

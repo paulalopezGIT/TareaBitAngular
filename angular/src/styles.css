@@ -39,3 +39,25 @@ body {
     width: 100%;
     height: 550px;
 }
+
+.footer-menu{
+    color: #FFFFFF;
+    text-decoration: none;  
+}
+
+.img-characters{
+    width: 200px;
+    height: 300px;
+}
+
+.art-characters{
+    height: 500px;
+}
+
+.contact-form label{
+    font-weight:600;
+}
+
+.dashboard-card{
+    height: 350px;
+}

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -7,32 +8,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) {}
+  
 
   ngOnInit(): void {
   }
 
   userInfo = {
-    userName:"",
     email:"",
     password:""
 
   }
 
   userInfoValidator = {
-    userName:false,
     email:false,
     password:false
 
   }
 
-  registrar(){
-    if(this.userInfo.userName === ""){
-      console.log("Nombre vacio");
-      this.userInfoValidator.userName=true;
-    }else{
-      this.userInfoValidator.userName=false;
-    }
+  login(){
     if(this.userInfo.email === ""){
       console.log("Email vacio");
       this.userInfoValidator.email=true;
@@ -46,11 +40,10 @@ export class LoginComponent implements OnInit {
       this.userInfoValidator.password=false;
     }
 
-    if(this.userInfo.userName !=="" && this.userInfo.email !=="" && this.userInfo.password !==""){
-      localStorage.setItem('userInfo',JSON.stringify(this.userInfo));
+    if(this.userInfo.email !=="" && this.userInfo.password !==""){
+      sessionStorage.setItem('loggedUser', this.userInfo.email);
+      this.router.navigate(['/dashboard']);
     }
-    console.log("funciona");
-    console.log(this.userInfo);
   }
 
 }
