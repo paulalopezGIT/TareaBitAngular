@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "angular-bit-ed75a": {
+      "hosting": {
+        "angular-bit-project": [
+          "angular-bit-ed75a"
+        ]
+      }
+    }
+  }
+}

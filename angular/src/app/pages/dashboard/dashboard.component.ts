@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from './../../services/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,12 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  public user:any;
+  constructor(private authService:AuthService) { }
 
-  userDisplayName = '';
-
-  ngOnInit(): void {
-    this.userDisplayName = sessionStorage.getItem('loggedUser');
+  async ngOnInit(){
+    console.log('dashboard');
+    this.user = await this.authService.getCurrentUser();
+    if(this.user){
+      console.log('user->',this.user);
+    }
   }
 
 }

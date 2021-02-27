@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import {FormControl, FormGroup} from '@angular/forms';
+import { AuthService } from './../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -8,41 +10,33 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private router: Router) {}
+  loginForm = new FormGroup({
+    email: new FormControl(''),
+    password:new FormControl(''),
+  });
+
+  public isLogged=false;
+  constructor(private authService: AuthService, private router:Router) {}
   
 
   ngOnInit(): void {
   }
 
-  userInfo = {
-    email:"",
-    password:""
-
-  }
-
-  userInfoValidator = {
-    email:false,
-    password:false
-
-  }
-
-  login(){
-    if(this.userInfo.email === ""){
-      console.log("Email vacio");
-      this.userInfoValidator.email=true;
+  async onLogin (){
+    const {email, password}=this.loginForm.value;
+    if(email !=="" && password){
+      try{
+        const response = await this.authService.login(email,password);
+        if(response){
+          this.isLogged=false;
+          this.router.navigate(['/dashboard']);
+        }
+      }catch(error){
+        this.isLogged=true;
+        console.log(error);
+      }
     }else{
-      this.userInfoValidator.email=false;
-    }
-    if(this.userInfo.password === ""){
-      console.log("Contraseña vacio");
-      this.userInfoValidator.password=true;
-    }else{
-      this.userInfoValidator.password=false;
-    }
-
-    if(this.userInfo.email !=="" && this.userInfo.password !==""){
-      sessionStorage.setItem('loggedUser', this.userInfo.email);
-      this.router.navigate(['/dashboard']);
+      this.isLogged=true;
     }
   }
 
